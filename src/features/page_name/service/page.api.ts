@@ -1,11 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { UploadRes } from '@/features/page_name/service/page.api.types.ts'
+import {GetDiskDataRes, GetUploadUrlRes, } from '@/features/page_name/service/page.api.types.ts'
 
-// const baseURL = 'https://cloud-api.yandex.net/v1/disk/'
-const myToken = 'y0_AgAAAAARkGX-AADLWwAAAADpPCsNbYO8uryPRKWaqydL8uilTx58NJg'
-// const myService =
-//   'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35'
+
 
 export const pageApi = createApi({
   reducerPath: 'pageApi',
@@ -23,37 +20,50 @@ export const pageApi = createApi({
 
   endpoints: build => {
     return {
-      getUploadUrl: build.query({
-        query: arg => {
+      getDiskData: build.query<GetDiskDataRes, { token:string }>({
+        query: (args) => {
           return {
             method: 'GET',
             url: 'https://cloud-api.yandex.net/v1/disk',
-            params: {
-              path: arg.path, //<path for the file upload>
-            },
             headers: {
-              // 'Content-Type': 'multipart/form-data',
-              Authorization: `Oauth ${myToken}}`,
+              Authorization: `OAuth ${args.token}`,
             },
           }
         },
       }),
-      uploadFiles: build.mutation<UploadRes, any>({
-        query: (args: any) => {
+
+      getUploadUrl: build.query<GetUploadUrlRes, { token:string }>({
+        query: (args) => {
           return {
-            method: 'PUT',
-            url: '',
+            method: 'GET',
+            url: 'https://cloud-api.yandex.net/v1/disk/resources/upload',
             params: {
-              path: args.path,
-              // /{bucket}/{key}
-              //<path for the file upload>
-              // /<ПУТЬ_К_ФАЙЛУ_НА_ЯНДЕКС_ДИСКЕ>
-              // %2Ffoo%2Fbar%2Fphoto.png
-              overwrite: true,
-              // fields: args.fields, //<properties to include in the response>
+              path: '/testfiles',
+              overwrite: true
+            },
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `OAuth ${args.token}`,
+            },
+          }
+        },
+      }),
+
+      uploadFiles: build.mutation<any, any>({
+        query: (args) => {
+          return {
+            method: 'POST',
+            url: args.url,
+            // params: {
+            //   path: '/data',
+            //   url: args.link,
+            // },
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              // Authorization: `OAuth ${args.token}`,
             },
             body: {
-              email: args.email,
+              data: args.data,
             },
           }
         },
@@ -61,4 +71,4 @@ export const pageApi = createApi({
     }
   },
 })
-export const { useLazyGetUploadUrlQuery, useUploadFilesMutation } = pageApi
+export const { useGetDiskDataQuery,useGetUploadUrlQuery, useUploadFilesMutation } = pageApi
