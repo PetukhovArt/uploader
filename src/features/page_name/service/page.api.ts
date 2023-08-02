@@ -4,8 +4,8 @@ import { UploadRes } from '@/features/page_name/service/page.api.types.ts'
 
 // const baseURL = 'https://cloud-api.yandex.net/v1/disk/'
 const myToken = 'y0_AgAAAAARkGX-AADLWwAAAADpPCsNbYO8uryPRKWaqydL8uilTx58NJg'
-const myService =
-  'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35'
+// const myService =
+//   'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35'
 
 export const pageApi = createApi({
   reducerPath: 'pageApi',

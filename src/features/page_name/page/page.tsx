@@ -1,27 +1,29 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { FileInput } from '@/components/ui/file-input'
-import {
-  useLazyGetUploadUrlQuery,
-  useUploadFilesMutation,
-} from '@/features/page_name/service/page.api.ts'
+// import {
+//   useLazyGetUploadUrlQuery,
+//   useUploadFilesMutation,
+// } from '@/features/page_name/service/page.api.ts'
 
 export const Page = () => {
-  const [file, setFile] = useState<any>()
-  const [isFilePicked, setIsFilePicked] = useState(false)
+  // const [file, setFile] = useState<any>()
+  // const [isFilePicked, setIsFilePicked] = useState(false)
+  //
+  // const [
+  //   getUploadUrl,
+  //   { data: url, isLoading: urlLoading, isError: urlError, isSuccess: urlSuccess },
+  // ] = useLazyGetUploadUrlQuery({})
+  //
+  // const [uploadFile, { data, isLoading, isError, isSuccess }] = useUploadFilesMutation({})
 
-  const [
-    getUploadUrl,
-    { data: url, isLoading: urlLoading, isError: urlError, isSuccess: urlSuccess },
-  ] = useLazyGetUploadUrlQuery({})
 
-  const [uploadFile, { data, isLoading, isError, isSuccess }] = useUploadFilesMutation({})
-
-  const uploadFileHandler = (file: File) => {
-    setIsFilePicked(true)
-    setFile(file)
-    getUploadUrl()
+  // file: File
+  const uploadFileHandler = () => {
+    // setIsFilePicked(true)
+    // setFile(file)
+    // getUploadUrl()
   }
 
   return (
