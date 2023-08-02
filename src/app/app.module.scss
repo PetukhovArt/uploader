@@ -1,0 +1,13 @@
+@import '../styles/mixins';
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main {
+  @include flex-block;
+
+  margin-top: 36px;
+}

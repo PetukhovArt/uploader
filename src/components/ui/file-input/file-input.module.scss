@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+
+  .trigger {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  .input {
+    display: none;
+  }
+}
