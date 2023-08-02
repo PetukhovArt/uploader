@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { FileInput } from '@/components/ui/file-input'
 import {useLocation} from 'react-router-dom';
 import {useGetUploadUrlQuery} from '@/features/page_name/service/page.api.ts';
-import {useEffect} from 'react';
 
 
 export const Page = () => {
@@ -13,10 +12,12 @@ export const Page = () => {
 
   const location = useLocation();
   let token = new URLSearchParams(location.hash).get('#access_token');
-  useEffect(() => {
-    const url = 'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35';
-    window.location.href = url;
-  }, [token]);
+
+  // useEffect(() => {
+  //   const url = 'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35';
+  //   window.location.href = url;
+  // }, [token]);
+
   // const { data: diskData} = useGetDiskDataQuery({token: token!}, {skip: !token})
   const { data: uploadUrl, isSuccess  } = useGetUploadUrlQuery({token: token!}, {skip: !token})
   if (isSuccess) {
