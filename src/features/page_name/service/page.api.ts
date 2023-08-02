@@ -38,7 +38,7 @@ export const pageApi = createApi({
             method: 'GET',
             url: 'https://cloud-api.yandex.net/v1/disk/resources/upload',
             params: {
-              path: '/testfiles',
+              path: '%2Fdisk',
               overwrite: true
             },
             headers: {
