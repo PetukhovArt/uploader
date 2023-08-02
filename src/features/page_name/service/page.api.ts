@@ -38,11 +38,10 @@ export const pageApi = createApi({
             method: 'GET',
             url: 'https://cloud-api.yandex.net/v1/disk/resources/upload',
             params: {
-              path: '%2Fdisk',
+              path: '/uploads',
               overwrite: true
             },
             headers: {
-              'Content-Type': 'multipart/form-data',
               Authorization: `OAuth ${args.token}`,
             },
           }
@@ -50,21 +49,20 @@ export const pageApi = createApi({
       }),
 
       uploadFiles: build.mutation<any, any>({
-        query: (args) => {
+        query: () => {
           return {
             method: 'POST',
-            url: args.url,
-            // params: {
-            //   path: '/data',
-            //   url: args.link,
+            url: 'https://cloud-api.yandex.net/v1/disk/resources/upload',
+            params: {
+              path: "/uploads",
+              url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4YLe3D_HN8E7maI-H1Tg6AFXb5EtluLlb3wA6fC7iKA&s'
+            },
+            // headers: {
+            //   'Content-Type': 'multipart/form-data',
             // },
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              // Authorization: `OAuth ${args.token}`,
-            },
-            body: {
-              data: args.data,
-            },
+            // body: {
+            //   data: args.data
+            // },
           }
         },
       }),

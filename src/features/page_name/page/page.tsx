@@ -1,47 +1,52 @@
-// import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { FileInput } from '@/components/ui/file-input'
-import {useLocation} from 'react-router-dom';
-import {useGetUploadUrlQuery} from '@/features/page_name/service/page.api.ts';
+import {useGetUploadUrlQuery, useUploadFilesMutation} from '@/features/page_name/service/page.api.ts';
+import {convertFileToBase64} from '@/features/page_name/imageToBase64.ts';
 
 
 export const Page = () => {
-
-  console.log('page render')
-
-  const location = useLocation();
-  let token = new URLSearchParams(location.hash).get('#access_token');
-
-  // useEffect(() => {
   //   const url = 'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35';
+
+// const getOAuthTokenUrl='https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35'
+const testToken = 'y0_AgAAAAARkGX-AADLWwAAAADpPCsNbYO8uryPRKWaqydL8uilTx58NJg'
+  // const location = useLocation();
+  // let token = new URLSearchParams(location.hash).get('#access_token');
+  // useEffect(() => {
   //   window.location.href = url;
   // }, [token]);
 
-  // const { data: diskData} = useGetDiskDataQuery({token: token!}, {skip: !token})
-  const { data: uploadUrl, isSuccess  } = useGetUploadUrlQuery({token: token!}, {skip: !token})
-  if (isSuccess) {
-    console.log(uploadUrl.href)
+  const { data: getUploadUrl,isError  } = useGetUploadUrlQuery({token: testToken})
+  const [uploadFiles] = useUploadFilesMutation()
+
+  if (isError) {
+    // window.location.href=getOAuthTokenUrl
   }
+    // uploadFiles(getUploadUrl.href) // запускаем запрос на загрузку файлов
+
 
 
   // const [file, setFile] = useState<any>()
   // const [isFilePicked, setIsFilePicked] = useState(false)
-  //
-  // const [
-  //   getUploadUrl,
-  //   { data: url, isLoading: urlLoading, isError: urlError, isSuccess: urlSuccess },
-  // ] = useLazyGetUploadUrlQuery({})
-  //
-  // const [uploadFile, { data, isLoading, isError, isSuccess }] = useUploadFilesMutation({})
 
 
-  // file: File
-  const uploadFileHandler = () => {
-    // setIsFilePicked(true)
-    // setFile(file)
-    // getUploadUrl()
-  }
+  const uploadFileHandler = (files: any) => {
+    console.log(files)
+      const file = files[0];
+      if (file.size < 4000000) {
+        convertFileToBase64(file, (file64: string) => {
+          console.log(file64)
+          if (getUploadUrl?.href) {
+            uploadFiles({
+              url: getUploadUrl.href,
+              data: file64
+            })
+          }
+        });
+      } else {
+        console.error("Error: ", "Файл слишком большого размера");
+      }
+    }
 
   return (
     <>
@@ -71,3 +76,6 @@ export const Page = () => {
 // fileReader.onloadend = () => {
 //   setImg(fileReader.result)
 // }
+
+
+

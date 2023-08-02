@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import s from './file-input.module.scss'
 
 type FileInputPropsType = {
-  onChange: (file: File) => void
+  onChange: (filelist: FileList) => void
   disabled?: boolean
   trigger: ReactNode
 }
@@ -17,8 +17,8 @@ export const FileInput = (props: FileInputPropsType) => {
   const handleUploadClick = () => inputRef.current?.click()
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      onChange(e.target.files[0])
+    if (e.target.files && e.target.files.length) {
+      onChange(e.target.files)
     }
   }
 
