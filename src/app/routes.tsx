@@ -10,7 +10,6 @@ import { App } from "@/app/App.tsx";
 export enum RouteNames {
   START_PAGE = "/",
   PAGE = "/page",
-  UPLOAD = "/page/#access_token=:token",
   AUTH = "/#access_token=:token",
 }
 
@@ -21,7 +20,7 @@ export const router = createBrowserRouter(
         path={RouteNames.START_PAGE}
         element={<Navigate to={RouteNames.PAGE} />}
       />
-      <Route path="*" element={<Navigate to={RouteNames.PAGE} />} />
+      <Route path={RouteNames.PAGE} element={<Upload />} />
       <Route path={RouteNames.AUTH} element={<Upload />} />
     </Route>
   )
