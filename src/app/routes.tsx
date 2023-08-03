@@ -19,7 +19,7 @@ export const router = createBrowserRouter(
     <Route path={RouteNames.START_PAGE} element={<App />}>
       <Route
         path={RouteNames.START_PAGE}
-        element={<Navigate to={RouteNames.PAGE} />}
+        element={<Navigate to={RouteNames.UPLOAD} />}
       />
       <Route path={RouteNames.UPLOAD} element={<Upload />} />
       <Route path={RouteNames.PAGE} element={<Upload />} />

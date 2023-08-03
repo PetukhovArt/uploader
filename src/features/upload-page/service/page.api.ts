@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import {
+  GetUploadUrlArgs,
   GetUploadUrlRes,
   UploadArgsType,
 } from "@/features/upload-page/service/page.api.types.ts";
@@ -13,10 +14,7 @@ export const pageApi = createApi({
 
   endpoints: (build) => {
     return {
-      getUploadUrl: build.query<
-        GetUploadUrlRes,
-        { token: string; path: string }
-      >({
+      getUploadUrl: build.query<GetUploadUrlRes, GetUploadUrlArgs>({
         query: (args) => {
           return {
             method: "GET",

@@ -7,18 +7,14 @@ import {
 } from "@/features/upload-page/service/page.api.ts";
 import { useState } from "react";
 import { FileList } from "@/features/upload-page/file-list";
+import { useLocation } from "react-router-dom";
 
-const testToken = "y0_AgAAAAARkGX-AADLWwAAAADpPCsNbYO8uryPRKWaqydL8uilTx58NJg";
+// const testToken = "y0_AgAAAAARkGX-AADLWwAAAADpPCsNbYO8uryPRKWaqydL8uilTx58NJg";
 
 export const Upload = () => {
-  //   const url = 'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35';
-  // const getOAuthTokenUrl='https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35'
-
-  // const location = useLocation();
-  // let token = new URLSearchParams(location.hash).get('#access_token');
-  // useEffect(() => {
-  //   window.location.href = url;
-  // }, [token]);
+  const location = useLocation();
+  let token = new URLSearchParams(location.hash).get("#access_token");
+  console.log(token);
   const [areSelected, setAreSelected] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileType[]>([]);
   const [uploadFiles] = useUploadFilesMutation();
@@ -26,24 +22,26 @@ export const Upload = () => {
 
   const uploadFileHandler = (files: FileType[]) => {
     setSelectedFiles(files);
-    files.forEach((baseFile) => {
-      getUploadUrl({ token: testToken, path: baseFile.file.name })
-        .unwrap()
-        .then((data) => {
-          uploadFiles({
-            url: data.href,
-            method: data.method,
-            data: baseFile.file,
+    if (token !== ":token") {
+      files.forEach((baseFile) => {
+        getUploadUrl({ token: token, path: baseFile.file.name })
+          .unwrap()
+          .then((data) => {
+            uploadFiles({
+              url: data.href,
+              method: data.method,
+              data: baseFile.file,
+            })
+              .unwrap()
+              .then(() => {
+                handleStatusUpdate(baseFile.file.name);
+              });
           })
-            .unwrap()
-            .then(() => {
-              handleStatusUpdate(baseFile.file.name);
-            });
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    });
+          .catch((e) => {
+            console.error(e);
+          });
+      });
+    }
   };
 
   const handleStatusUpdate = (fileName: string) => {
@@ -61,19 +59,25 @@ export const Upload = () => {
     });
   };
 
+  const redirectToOAuth = () => {
+    window.location.href =
+      "https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35";
+  };
+
   return (
     <>
-      <div className={s.buttonBlock}>
-        <FileInput
-          setAreSelected={setAreSelected}
-          onChange={uploadFileHandler}
-          trigger={
-            <Button variant={"secondary"} disabled={false}>
-              Upload Files
-            </Button>
-          }
-        />
-      </div>
+      <Button variant={"secondary"} onClick={redirectToOAuth}>
+        Login with Yandex
+      </Button>
+      {token && token !== ":token" && (
+        <div className={s.buttonBlock}>
+          <FileInput
+            setAreSelected={setAreSelected}
+            onChange={uploadFileHandler}
+            trigger={<Button disabled={false}>Upload Files</Button>}
+          />
+        </div>
+      )}
       {areSelected && (
         <div>
           <FileList files={selectedFiles} />
