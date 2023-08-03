@@ -16,7 +16,7 @@ type FileListPropsType = {
 export const FileList = ({ files }: FileListPropsType) => {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} size="small">
+      <Table sx={{ minWidth: 950 }} size="small">
         <TableHead className={s.head}>
           <TableRow>
             <TableCell className={s.cellName}>Name</TableCell>
@@ -35,7 +35,13 @@ export const FileList = ({ files }: FileListPropsType) => {
                   border: 0,
                 },
               }}
-              className={file.isUploading ? s.uploadingRow : s.defaultRow}
+              className={
+                file.isUploading
+                  ? s.uploadingRow
+                  : file.isError
+                  ? s.errorRow
+                  : s.defaultRow
+              }
             >
               <TableCell component="th" scope="row">
                 {file.file.name}

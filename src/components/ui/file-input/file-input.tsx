@@ -15,6 +15,7 @@ export type FileType = {
   file: File;
   isUploading: boolean;
   status: string;
+  isError: boolean;
 };
 
 export const FileInput = (props: FileInputPropsType) => {
@@ -30,6 +31,7 @@ export const FileInput = (props: FileInputPropsType) => {
         file,
         status: "Загрузка",
         isUploading: true,
+        isError: false,
       }));
       onChange(fileList);
     }

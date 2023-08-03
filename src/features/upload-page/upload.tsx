@@ -35,17 +35,33 @@ export const Upload = () => {
             })
               .unwrap()
               .then(() => {
-                handleStatusUpdate(baseFile.file.name);
+                handleStatusUpdateSuccess(baseFile.file.name);
               });
           })
-          .catch((e) => {
-            console.error(e);
+          .catch((error) => {
+            handleStatusUpdateError(baseFile.file.name, error.error);
           });
       });
     }
   };
 
-  const handleStatusUpdate = (fileName: string) => {
+  const handleStatusUpdateError = (fileName: string, error: string) => {
+    setSelectedFiles((prevSelectedFiles) => {
+      return prevSelectedFiles.map((file) => {
+        if (file.file.name === fileName) {
+          return {
+            ...file,
+            status: error,
+            isUploading: false,
+            isError: true,
+          };
+        }
+        return file;
+      });
+    });
+  };
+
+  const handleStatusUpdateSuccess = (fileName: string) => {
     setSelectedFiles((prevSelectedFiles) => {
       return prevSelectedFiles.map((file) => {
         if (file.file.name === fileName) {
