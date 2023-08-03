@@ -62,7 +62,7 @@ export const Upload = () => {
 
   const redirectToOAuth = () => {
     window.location.href =
-      "https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35";
+      "https://oauth.yandex.ru/authorize?response_type=token&client_id=d40b56d85e754d1fa89b5717f5858fb5";
   };
 
   const isAuth = token && token !== ":token";
