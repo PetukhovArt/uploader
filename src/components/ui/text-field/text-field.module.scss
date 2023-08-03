@@ -1,6 +1,6 @@
-@import '@/styles/mixins';
+@import "@/styles/mixins";
 
-[type='search']::-webkit-search-cancel-button {
+[type="search"]::-webkit-search-cancel-button {
   appearance: none;
 }
 
@@ -103,11 +103,11 @@ input {
     }
   }
 
-  &[data-icon*='start'] {
+  &[data-icon*="start"] {
     padding-left: 36px;
   }
 
-  &[data-icon*='end'] {
+  &[data-icon*="end"] {
     padding-right: 36px;
   }
 }

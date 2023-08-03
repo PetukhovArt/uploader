@@ -1,72 +1,47 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import {GetDiskDataRes, GetUploadUrlRes, } from '@/features/page_name/service/page.api.types.ts'
+import {
+  GetUploadUrlRes,
+  UploadArgsType,
+} from "@/features/page_name/service/page.api.types.ts";
 
-
+const baseURL = "https://cloud-api.yandex.net/v1/disk/resources/upload";
 
 export const pageApi = createApi({
-  reducerPath: 'pageApi',
-  baseQuery: fetchBaseQuery({
-    // prepareHeaders: headers => {
-    // headers.set('Content-Type', 'multipart/form-data')
-    // headers.set(
-    //   'Authorization',
-    //   'Oauth y0_AgAAAAARkGX-AATuwQAAAADpO20FORimoCU-QyumZywbrHasjDmJj0c'
-    // )
-    // headers.set('Authorization', 'OAuth <ВАШ_ТОКЕН>')
-    // return headers
-    // },
-  }),
+  reducerPath: "pageApi",
+  baseQuery: fetchBaseQuery(),
 
-  endpoints: build => {
+  endpoints: (build) => {
     return {
-      getDiskData: build.query<GetDiskDataRes, { token:string }>({
+      getUploadUrl: build.query<
+        GetUploadUrlRes,
+        { token: string; path: string }
+      >({
         query: (args) => {
           return {
-            method: 'GET',
-            url: 'https://cloud-api.yandex.net/v1/disk',
-            headers: {
-              Authorization: `OAuth ${args.token}`,
-            },
-          }
-        },
-      }),
-
-      getUploadUrl: build.query<GetUploadUrlRes, { token:string }>({
-        query: (args) => {
-          return {
-            method: 'GET',
-            url: 'https://cloud-api.yandex.net/v1/disk/resources/upload',
+            method: "GET",
+            url: baseURL,
             params: {
-              path: '/uploads',
-              overwrite: true
+              path: args.path,
+              overwrite: true,
             },
             headers: {
               Authorization: `OAuth ${args.token}`,
             },
-          }
+          };
         },
       }),
 
-      uploadFiles: build.mutation<any, any>({
-        query: () => {
+      uploadFiles: build.mutation<any, UploadArgsType>({
+        query: (args) => {
           return {
-            method: 'POST',
-            url: 'https://cloud-api.yandex.net/v1/disk/resources/upload',
-            params: {
-              path: "/uploads",
-              url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4YLe3D_HN8E7maI-H1Tg6AFXb5EtluLlb3wA6fC7iKA&s'
-            },
-            // headers: {
-            //   'Content-Type': 'multipart/form-data',
-            // },
-            // body: {
-            //   data: args.data
-            // },
-          }
+            method: args.method,
+            url: args.url,
+            body: args.data,
+          };
         },
       }),
-    }
+    };
   },
-})
-export const { useGetDiskDataQuery,useGetUploadUrlQuery, useUploadFilesMutation } = pageApi
+});
+export const { useLazyGetUploadUrlQuery, useUploadFilesMutation } = pageApi;

@@ -1,6 +1,12 @@
-import { SVGProps, memo } from 'react'
+import { SVGProps, memo } from "react";
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={96} height={96} fill="none" {...props}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={96}
+    height={96}
+    fill="none"
+    {...props}
+  >
     <path
       fill="#8C61FF"
       fillOpacity={0.1}
@@ -30,9 +36,15 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
       fill="#BEA6FF"
       d="M59 35H48.2a.7.7 0 0 1 0-1.3H59a.7.7 0 0 1 0 1.4ZM44.5 35h-7.8a.7.7 0 0 1 0-1.3h7.8a.7.7 0 0 1 0 1.4ZM59 39.7h-7.1a.7.7 0 0 1 0-1.4h7a.7.7 0 1 1 0 1.4ZM48.2 39.7H36.7a.7.7 0 0 1 0-1.4h11.5a.7.7 0 1 1 0 1.4ZM59 44.3H46.3a.7.7 0 0 1 0-1.4H59a.7.7 0 0 1 0 1.4ZM42.6 44.3h-5.9a.7.7 0 0 1 0-1.4h6a.7.7 0 0 1 0 1.4ZM59 49h-6.2a.7.7 0 0 1 0-1.4H59a.7.7 0 1 1 0 1.4ZM49.1 49H36.7a.7.7 0 0 1 0-1.4h12.4a.7.7 0 1 1 0 1.4ZM54 53.6H41.7a.7.7 0 1 1 0-1.4H54a.7.7 0 1 1 0 1.4Z"
     />
-    <path fill="#333" d="M23.8 43v26.6l16.1-13.3L23.8 43ZM55.8 56.3 72 69.6V43L55.8 56.3Z" />
+    <path
+      fill="#333"
+      d="M23.8 43v26.6l16.1-13.3L23.8 43ZM55.8 56.3 72 69.6V43L55.8 56.3Z"
+    />
     <path fill="#333" d="m47.9 62.8-8-6.5-16.1 13.3H72L55.8 56.3l-8 6.5Z" />
-    <path fill="#333" d="M28.4 50.5v15.3l9.3-7.7-9.3-7.6ZM63.2 57.9 72 65V50.7l-8.8 7.2Z" />
+    <path
+      fill="#333"
+      d="M28.4 50.5v15.3l9.3-7.7-9.3-7.6ZM63.2 57.9 72 65V50.7l-8.8 7.2Z"
+    />
     <path
       fill="#BEA6FF"
       d="M23.8 70.3h-.3a.7.7 0 0 1-.4-.7V43a.7.7 0 0 1 .4-.6.7.7 0 0 1 .7.1l16.2 13.3a.7.7 0 0 1 0 1L24.2 70.2l-.4.2Zm.7-25.8v23.6l14.3-11.8-14.3-11.8Z"
@@ -51,7 +63,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
       d="M44.6 77.1a.7.7 0 0 1-.7-.6v-3.6a.7.7 0 0 1 1.3 0v3.6c0 .3-.3.6-.6.6Z"
     />
   </svg>
-)
-const MailIcon = memo(SvgComponent)
+);
+const MailIcon = memo(SvgComponent);
 
-export default MailIcon
+export default MailIcon;

@@ -1,7 +1,13 @@
-import { memo, SVGProps } from 'react'
+import { memo, SVGProps } from "react";
 
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="none" {...props}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={16}
+    height={16}
+    fill="none"
+    {...props}
+  >
     <g clipPath="url(#a)">
       <path
         fill="#E6AC39"
@@ -14,7 +20,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-)
-const StarIcon = memo(SvgComponent)
+);
+const StarIcon = memo(SvgComponent);
 
-export default StarIcon
+export default StarIcon;

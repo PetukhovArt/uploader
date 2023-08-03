@@ -1,68 +1,68 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from "react";
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { TextField } from './'
+import { TextField } from "./";
 
 const meta = {
-  title: 'Components/TextField',
+  title: "Components/TextField",
   component: TextField,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     type: {
-      options: ['search', 'password', 'text'],
+      options: ["search", "password", "text"],
     },
   },
-} satisfies Meta<typeof TextField>
+} satisfies Meta<typeof TextField>;
 
-export default meta
-type Story = StoryObj<typeof TextField>
+export default meta;
+type Story = StoryObj<typeof TextField>;
 
 export const Primary: Story = {
   args: {
-    type: 'text',
-    placeholder: 'placeholder',
+    type: "text",
+    placeholder: "placeholder",
   },
-}
+};
 export const Invalid: Story = {
   args: {
-    type: 'text',
+    type: "text",
 
-    errorMessage: 'error',
-    value: 'error',
+    errorMessage: "error",
+    value: "error",
   },
-}
+};
 
 export const Search: Story = {
-  render: args => {
-    const [value, setValue] = useState<string>('')
+  render: (args) => {
+    const [value, setValue] = useState<string>("");
     const handler = (value: ChangeEvent<HTMLInputElement>) => {
-      setValue(value.target.value)
-    }
+      setValue(value.target.value);
+    };
 
     return (
       <>
         <TextField
           {...args}
-          type={'search'}
+          type={"search"}
           value={value}
-          onChange={e => handler(e)}
-          onClearValue={() => setValue('')}
+          onChange={(e) => handler(e)}
+          onClearValue={() => setValue("")}
         />
       </>
-    )
+    );
   },
-}
+};
 
 export const Password: Story = {
   args: {
-    type: 'password',
+    type: "password",
   },
-}
+};
 export const Disabled: Story = {
   args: {
-    type: 'text',
+    type: "text",
 
     disabled: true,
   },
-}
+};

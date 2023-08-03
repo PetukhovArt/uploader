@@ -1,0 +1,22 @@
+.cellProgress {
+  width: 250px;
+  padding: 0;
+  margin:  0;
+}
+.cellName {
+  width: 300px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.cellStatus {
+width: 250px;
+}
+.uploadingRow {
+  background-color: #f2d679;
+}
+
+.defaultRow {
+  background-color: #9aef9a;
+}

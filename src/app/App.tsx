@@ -1,9 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
-import s from './app.module.scss'
+import s from "./app.module.scss";
 
 export function App() {
-
   return (
     <div className="App">
       <div className={s.container}>
@@ -12,5 +11,5 @@ export function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,21 +1,23 @@
-import { SVGProps, Ref, forwardRef, memo, useState, useEffect } from 'react'
+import { SVGProps, Ref, forwardRef, memo, useState, useEffect } from "react";
 
-type Direction = 'asc' | 'desc'
+type Direction = "asc" | "desc";
 
 interface Props extends SVGProps<SVGSVGElement> {
-  direction?: Direction
+  direction?: Direction;
 }
 
 const SvgComponent = (props: Props, ref: Ref<SVGSVGElement>) => {
-  const [direction, setDirection] = useState<Direction | undefined>(props.direction)
+  const [direction, setDirection] = useState<Direction | undefined>(
+    props.direction
+  );
 
   useEffect(() => {
-    setDirection(props.direction)
-  }, [props.direction])
+    setDirection(props.direction);
+  }, [props.direction]);
 
   const handleClick = () => {
-    setDirection(direction === 'asc' ? 'desc' : 'asc')
-  }
+    setDirection(direction === "asc" ? "desc" : "asc");
+  };
 
   return (
     <svg
@@ -26,7 +28,7 @@ const SvgComponent = (props: Props, ref: Ref<SVGSVGElement>) => {
       ref={ref}
       {...props}
       onClick={handleClick}
-      style={{ transform: direction === 'desc' ? 'rotate(180deg)' : undefined }}
+      style={{ transform: direction === "desc" ? "rotate(180deg)" : undefined }}
     >
       <g clipPath="url(#a)">
         <path
@@ -40,9 +42,9 @@ const SvgComponent = (props: Props, ref: Ref<SVGSVGElement>) => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};
 
-const ForwardRef = forwardRef(SvgComponent)
+const ForwardRef = forwardRef(SvgComponent);
 
-export const ArrowIcon = memo(ForwardRef)
+export const ArrowIcon = memo(ForwardRef);

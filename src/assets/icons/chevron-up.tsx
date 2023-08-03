@@ -1,4 +1,4 @@
-import { SVGProps, Ref, forwardRef, memo } from 'react'
+import { SVGProps, Ref, forwardRef, memo } from "react";
 const ChevronUp = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     width={12}
@@ -21,8 +21,8 @@ const ChevronUp = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-)
-const ForwardRef = forwardRef(ChevronUp)
-const Memo = memo(ForwardRef)
+);
+const ForwardRef = forwardRef(ChevronUp);
+const Memo = memo(ForwardRef);
 
-export default Memo
+export default Memo;
