@@ -35,13 +35,9 @@ export const FileList = ({ files }: FileListPropsType) => {
                   border: 0,
                 },
               }}
-              className={
-                file.isUploading
-                  ? s.uploadingRow
-                  : file.isError
-                  ? s.errorRow
-                  : s.defaultRow
-              }
+              className={`${file.isError && s.errorRow} ${
+                file.isUploading && s.uploadingRow
+              } ${!file.isError && !file.isUploading && s.successRow}`}
             >
               <TableCell component="th" scope="row">
                 {file.file.name}
