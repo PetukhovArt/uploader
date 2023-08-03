@@ -46,7 +46,7 @@ export const Upload = () => {
           })
           .catch((error) => {
             //ошибка при загрузке
-            handleStatusUpdateError(baseFile.file.name, error.error);
+            handleStatusUpdateError(baseFile.file.name, error.data.error);
           });
       });
     }
