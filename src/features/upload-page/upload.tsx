@@ -9,13 +9,17 @@ import { useState } from "react";
 import { FileList } from "@/features/upload-page/file-list";
 import { useLocation } from "react-router-dom";
 
-// const testToken = "y0_AgAAAAARkGX-AADLWwAAAADpPCsNbYO8uryPRKWaqydL8uilTx58NJg";
-
 export const Upload = () => {
   const location = useLocation();
-  let token = new URLSearchParams(location.hash).get("#access_token");
 
-  console.log(token);
+  let token = new URLSearchParams(location.hash).get("#access_token");
+  if (token) {
+    localStorage.setItem("token", token);
+  }
+
+  const checkToken = () => !!localStorage.getItem("token");
+  const getToken = () => localStorage.getItem("token");
+
   const [areSelected, setAreSelected] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileType[]>([]);
   const [uploadFiles] = useUploadFilesMutation();
@@ -23,11 +27,12 @@ export const Upload = () => {
 
   const uploadFileHandler = (files: FileType[]) => {
     setSelectedFiles(files);
-    if (token !== ":token") {
+    if (checkToken()) {
       files.forEach((baseFile) => {
-        getUploadUrl({ token: token, path: baseFile.file.name })
+        getUploadUrl({ token: getToken(), path: baseFile.file.name })
           .unwrap()
           .then((data) => {
+            //uploadURL получен
             uploadFiles({
               url: data.href,
               method: data.method,
@@ -35,10 +40,12 @@ export const Upload = () => {
             })
               .unwrap()
               .then(() => {
+                //файл загружен
                 handleStatusUpdateSuccess(baseFile.file.name);
               });
           })
           .catch((error) => {
+            //ошибка при загрузке
             handleStatusUpdateError(baseFile.file.name, error.error);
           });
       });
@@ -60,7 +67,6 @@ export const Upload = () => {
       });
     });
   };
-
   const handleStatusUpdateSuccess = (fileName: string) => {
     setSelectedFiles((prevSelectedFiles) => {
       return prevSelectedFiles.map((file) => {
@@ -81,16 +87,14 @@ export const Upload = () => {
       "https://oauth.yandex.ru/authorize?response_type=token&client_id=c6bbc93d6a394c0b93959d5ce59003c0";
   };
 
-  const isAuth = token && token !== ":token";
-
   return (
     <>
-      {!isAuth && (
+      {!checkToken() && (
         <Button variant={"secondary"} onClick={redirectToOAuth}>
           Login with Yandex
         </Button>
       )}
-      {isAuth && (
+      {checkToken() && (
         <div className={s.buttonBlock}>
           <FileInput
             setAreSelected={setAreSelected}
