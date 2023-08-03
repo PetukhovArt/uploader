@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 export const Upload = () => {
   const location = useLocation();
   let token = new URLSearchParams(location.hash).get("#access_token");
+
   console.log(token);
   const [areSelected, setAreSelected] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileType[]>([]);
