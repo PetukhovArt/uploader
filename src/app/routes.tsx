@@ -11,7 +11,7 @@ export enum RouteNames {
   START_PAGE = "/",
   PAGE = "/page",
   UPLOAD = "/page/#access_token=:token",
-  AUTH = "/page/*",
+  AUTH = "/#access_token=:token",
 }
 
 export const router = createBrowserRouter(
@@ -26,3 +26,4 @@ export const router = createBrowserRouter(
     </Route>
   )
 );
+// https://uploader-woad.vercel.app/#access_token=y0_AgAAAAARkGX-AApHKwAAAADpPLOCWwLmgGXxQLOU54569cATwOLgrQU&token_type=bearer&expires_in=31441864
