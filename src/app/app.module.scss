@@ -1,13 +1,9 @@
 @import "../styles/mixins";
 
-.container {
+
+.app {
+  @include flex-block;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-}
-
-.main {
-  @include flex-block;
-
-  margin-top: 36px;
+  margin: 36px auto 0;
 }
