@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   GetUploadUrlRes,
   UploadArgsType,
-} from "@/features/page_name/service/page.api.types.ts";
+} from "@/features/upload-page/service/page.api.types.ts";
 
 const baseURL = "https://cloud-api.yandex.net/v1/disk/resources/upload";
 

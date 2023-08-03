@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import { App } from "@/app/App.tsx";
-import { Page } from "@/features/page_name/page";
+import { Upload } from "@/features/upload-page";
 
 export enum RouteNames {
   START_PAGE = "/",
@@ -21,8 +21,8 @@ export const router = createBrowserRouter(
         path={RouteNames.START_PAGE}
         element={<Navigate to={RouteNames.PAGE} />}
       />
-      <Route path={RouteNames.UPLOAD} element={<Page />} />
-      <Route path={RouteNames.PAGE} element={<Page />} />
+      <Route path={RouteNames.UPLOAD} element={<Upload />} />
+      <Route path={RouteNames.PAGE} element={<Upload />} />
     </Route>
   )
 );

@@ -17,7 +17,7 @@ export const FileList = ({ files }: FileListPropsType) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} size="small">
-        <TableHead>
+        <TableHead className={s.head}>
           <TableRow>
             <TableCell className={s.cellName}>Name</TableCell>
             <TableCell className={s.cellProgress}></TableCell>

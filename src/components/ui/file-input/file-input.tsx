@@ -8,6 +8,7 @@ type FileInputPropsType = {
   onChange: (files: FileType[]) => void;
   disabled?: boolean;
   trigger: ReactNode;
+  setAreSelected: (value: boolean) => void;
 };
 
 export type FileType = {
@@ -17,12 +18,13 @@ export type FileType = {
 };
 
 export const FileInput = (props: FileInputPropsType) => {
-  const { onChange, disabled = false, trigger } = props;
+  const { onChange, disabled = false, trigger, setAreSelected } = props;
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleUploadClick = () => inputRef.current?.click();
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAreSelected(true);
     if (e.target.files && e.target.files.length > 0) {
       const fileList = Array.from(e.target.files).map((file) => ({
         file,

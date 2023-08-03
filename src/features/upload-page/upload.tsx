@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button";
-import s from "./page.module.scss";
+import s from "./upload.module.scss";
 import { FileInput, FileType } from "@/components/ui/file-input";
 import {
   useLazyGetUploadUrlQuery,
   useUploadFilesMutation,
-} from "@/features/page_name/service/page.api.ts";
-import { FileList } from "@/features/page_name/file-list/file-list.tsx";
+} from "@/features/upload-page/service/page.api.ts";
 import { useState } from "react";
+import { FileList } from "@/features/upload-page/file-list";
 
 const testToken = "y0_AgAAAAARkGX-AADLWwAAAADpPCsNbYO8uryPRKWaqydL8uilTx58NJg";
 
-export const Page = () => {
+export const Upload = () => {
   //   const url = 'https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35';
   // const getOAuthTokenUrl='https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35'
 
@@ -19,7 +19,7 @@ export const Page = () => {
   // useEffect(() => {
   //   window.location.href = url;
   // }, [token]);
-
+  const [areSelected, setAreSelected] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileType[]>([]);
   const [uploadFiles] = useUploadFilesMutation();
   const [getUploadUrl] = useLazyGetUploadUrlQuery({});
@@ -63,17 +63,22 @@ export const Page = () => {
 
   return (
     <>
-      <FileInput
-        onChange={uploadFileHandler}
-        trigger={
-          <Button variant={"secondary"} disabled={false}>
-            Upload File
-          </Button>
-        }
-      />
-      <div className={s.table}>
-        <FileList files={selectedFiles} />
+      <div className={s.buttonBlock}>
+        <FileInput
+          setAreSelected={setAreSelected}
+          onChange={uploadFileHandler}
+          trigger={
+            <Button variant={"secondary"} disabled={false}>
+              Upload Files
+            </Button>
+          }
+        />
       </div>
+      {areSelected && (
+        <div>
+          <FileList files={selectedFiles} />
+        </div>
+      )}
     </>
   );
 };

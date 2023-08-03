@@ -1,7 +1,7 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
-import { pageApi } from "@/features/page_name/service/page.api.ts";
+import { pageApi } from "@/features/upload-page/service/page.api.ts";
 
 export const store = configureStore({
   reducer: {
