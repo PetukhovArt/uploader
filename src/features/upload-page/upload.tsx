@@ -65,12 +65,16 @@ export const Upload = () => {
       "https://oauth.yandex.ru/authorize?response_type=token&client_id=ea3a3312fc6d47beba22c334e4839b35";
   };
 
+  const isAuth = token && token !== ":token";
+
   return (
     <>
-      <Button variant={"secondary"} onClick={redirectToOAuth}>
-        Login with Yandex
-      </Button>
-      {token && token !== ":token" && (
+      {!isAuth && (
+        <Button variant={"secondary"} onClick={redirectToOAuth}>
+          Login with Yandex
+        </Button>
+      )}
+      {isAuth && (
         <div className={s.buttonBlock}>
           <FileInput
             setAreSelected={setAreSelected}

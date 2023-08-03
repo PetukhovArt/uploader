@@ -17,9 +17,12 @@ export enum RouteNames {
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={RouteNames.START_PAGE} element={<App />}>
-      <Route path={RouteNames.PAGE} element={<Upload />} />
-      <Route path={RouteNames.AUTH} element={<Upload />} />
+      <Route
+        path={RouteNames.START_PAGE}
+        element={<Navigate to={RouteNames.PAGE} />}
+      />
       <Route path="*" element={<Navigate to={RouteNames.PAGE} />} />
+      <Route path={RouteNames.AUTH} element={<Upload />} />
     </Route>
   )
 );
