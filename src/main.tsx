@@ -1,6 +1,6 @@
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/700.css";
-import "./styles/index.scss";
+import "@/assets/styles/index.scss";
 
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
